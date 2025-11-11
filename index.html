@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WA Sender - Bulk WhatsApp Messaging Extension</title>
+    <link rel="icon" href="assets/images/favico.png" type="image/png">
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS (Animate on Scroll) for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- Enhanced Styling for Dynamic & Playful Experience --- */
+
+        body {
+            overflow-x: hidden; /* Prevent horizontal scrollbars from animations */
+        }
+
+        /* General Animation & Transition */
+        [data-aos] {
+            transition-property: transform, opacity;
+        }
+
+        /* Glassmorphism Base Style */
+        .glassmorphism-base {
+            background: rgba(255, 255, 255, 0.08); /* Subtle transparent white */
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px); /* The magic blur effect */
+            -webkit-backdrop-filter: blur(5px); /* Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Light border */
+        }
+
+        /* Header Glassmorphism */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* Ensure it stays on top */
+            background: rgba(255, 255, 255, 0.05); /* More subtle for header */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Parallax & Animated Shapes Background */
+        .animated-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            list-style: none;
+            display: block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: float 25s infinite linear;
+            bottom: -150px;
+        }
+
+        .shape.square {
+            border-radius: 10%;
+        }
+
+        .shape.triangle {
+            background-color: transparent;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 40px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0;
+        }
+
+        .shape-1 { left: 10%; width: 80px; height: 80px; animation-delay: 0s; }
+        .shape-2 { left: 20%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 12s; }
+        .shape-3 { left: 25%; width: 50px; height: 50px; animation-delay: 4s; }
+        .shape-4 { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .shape-5 { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .shape-6 { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .shape-7 { left: 85%; width: 70px; height: 70px; animation-delay: 7s; }
+        .shape-8 { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .shape-9 { left: 90%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .shape-10 { left: 5%; width: 45px; height: 45px; animation-delay: 10s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Hero Section Enhancement */
+        #hero {
+            position: relative;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Feature Card Enhancements (Glassmorphism) */
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+            text-align: center;
+            @extend .glassmorphism-base; /* Apply base glassmorphism */
+            background: rgba(255, 255, 255, 0.08); /* Override base background for subtlety */
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+            display: block;
+        }
+
+        /* Screenshot Card Enhancements (Glassmorphism) */
+        .screenshots-section .card {
+            @extend .glassmorphism-base; /* Apply base glassmorphism */
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .screenshots-section .outer {
+            transition: transform 0.3s ease;
+        }
+        .screenshots-section .outer:hover {
+            transform: scale(1.05);
+        }
+        .screenshots-section .outer:hover .card {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Installation Steps Enhancements */
+        .how-to-use-section ol li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .how-to-use-section ol li:hover {
+            background-color: rgba(var(--color-surface-rgb), 0.5);
+        }
+        .how-to-use-section ol li .step-icon {
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            margin-right: 1.5rem;
+            margin-top: 0.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* Contact Form Enhancements */
+        .contact-form .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .contact-form .input-group .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+        }
+        .contact-form input, .contact-form textarea {
+            padding-left: 45px !important;
+        }
+
+        /* Footer Social Links */
+        .social-links a {
+            font-size: 1.8rem;
+            color: var(--color-text-muted);
+            margin: 0 10px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--color-accent);
+            transform: scale(1.2);
+        }
+        .social-links .text-label {
+            display: none; /* Hide text labels for icons */
+        }
+
+        /* Basic Tab Styling */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .tab-button {
+            background-color: var(--color-surface-alt);
+            color: var(--color-text-muted);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.1em;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-right: 5px;
+        }
+
+        .tab-button:hover {
+            background-color: var(--color-surface);
+            color: var(--color-text);
+        }
+
+        .tab-button.active {
+            background-color: var(--color-accent);
+            color: var(--color-text-inverse);
+            font-weight: 600;
+            border-bottom: 3px solid var(--color-accent); /* Highlight active tab */
+            margin-bottom: -1px; /* Overlap border */
+        }
+
+        /* Tab Content Glassmorphism */
+        .tab-content {
+            @extend .glassmorphism-base; /* Apply base glassmorphism */
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 0 0 16px 16px; /* Keep top corners sharp for tabs */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: none; /* Ensure no top border conflict with tabs */
+        }
+
+        .tab-content.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header data-aos="fade-down">
+        <div class="container">
+            <div class="logo">WA Sender</div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-to-use-section">How to Use</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="assets/downloads/WA_Sender_Free.zip" download class="btn btn-primary" style="">
+                <i class="fas fa-download"></i>&nbsp; Install Now
+            </a>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-section">
+        <div class="animated-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2 square"></div>
+            <div class="shape shape-3 triangle"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5 square"></div>
+            <div class="shape shape-6"></div>
+            <div class="shape shape-7 triangle"></div>
+            <div class="shape shape-8"></div>
+            <div class="shape shape-9 square"></div>
+            <div class="shape shape-10"></div>
+        </div>
+        <div class="hero-background-glow"></div>
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+                <h1>Kirim Pesan WhatsApp Massal dengan Mudah</h1>
+                <p class="subtitle">Ekstensi Chrome yang efisien untuk mengirim pesan ke banyak kontak sekaligus, mendukung personalisasi dan lampiran.</p>
+                <a href="assets/downloads/WA_Sender_Free.zip" download class="btn btn-primary btn-large">Mulai Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="circuit-board-background"></div>
+        <div class="container">
+            <h2 data-aos="fade-up">Fitur Unggulan</h2>
+            <div class="feature-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-rocket icon"></i>
+                    <h3>Pengiriman Massal</h3>
+                    <p>Kirim pesan ke ribuan kontak WhatsApp hanya dengan beberapa klik.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-file-csv icon"></i>
+                    <h3>Impor CSV</h3>
+                    <p>Muat daftar nomor telepon dan pesan dari file CSV Anda.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-save icon"></i>
+                    <h3>Manajemen Template</h3>
+                    <p>Simpan dan gunakan kembali template pesan untuk efisiensi maksimal.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-paperclip icon"></i>
+                    <h3>Lampiran Fleksibel</h3>
+                    <p>Sertakan gambar atau dokumen penting dengan pesan Anda.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fas fa-user-tag icon"></i>
+                    <h3>Pesan Personal</h3>
+                    <p>Personalisasi pesan Anda menggunakan placeholder dari data CSV.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <i class="fas fa-laptop-code icon"></i>
+                    <h3>Antarmuka Bersih</h3>
+                    <p>Desain intuitif dan mudah digunakan untuk semua tingkatan pengguna.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots" class="screenshots-section">
+        <div class="container">
+            <h2 data-aos="fade-up">Galeri Ekstensi</h2>
+            <div class="screenshot-grid">
+                <div class="outer" data-aos="zoom-in-up" data-aos-delay="100">
+                    <div class="dot"></div>
+                    <div class="card">
+                        <div class="ray"></div>
+                        <div class="card-content">
+                            <img src="assets/images/showcase1.png" alt="Proses Otomatis Berjalan" class="screenshot-item">
+                            <p class="screenshot-description">Ekstensi bekerja di latar belakang, menampilkan overlay "Proses otomatis berjalan" untuk memastikan tidak ada interupsi saat pengiriman pesan.</p>
+                        </div>
+                        <div class="line topl"></div>
+                        <div class="line leftl"></div>
+                        <div class="line bottoml"></div>
+                        <div class="line rightl"></div>
+                    </div>
+                </div>
+                <div class="outer" data-aos="zoom-in-up" data-aos-delay="200">
+                    <div class="dot"></div>
+                    <div class="card">
+                        <div class="ray"></div>
+                        <div class="card-content">
+                            <img src="assets/images/showcase2.png" alt="Antarmuka Pengiriman Pesan" class="screenshot-item">
+                            <p class="screenshot-description">Tampilan popup ekstensi saat proses pengiriman pesan massal sedang berlangsung, lengkap dengan progress bar dan status.</p>
+                        </div>
+                        <div class="line topl"></div>
+                        <div class="line leftl"></div>
+                        <div class="line bottoml"></div>
+                        <div class="line rightl"></div>
+                    </div>
+                </div>
+                <div class="outer" data-aos="zoom-in-up" data-aos-delay="300">
+                    <div class="dot"></div>
+                    <div class="card">
+                        <div class="ray"></div>
+                        <div class="card-content">
+                            <img src="assets/images/showcase3.png" alt="Manajemen Template dan Mode Pengiriman" class="screenshot-item">
+                            <p class="screenshot-description">Antarmuka popup yang bersih, menampilkan opsi mode pengiriman (Manual/CSV) dan fitur manajemen template yang baru ditambahkan.</p>
+                        </div>
+                        <div class="line topl"></div>
+                        <div class="line leftl"></div>
+                        <div class="line bottoml"></div>
+                        <div class="line rightl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-to-use-section" class="how-to-use-section">
+        <div class="circuit-board-background"></div>
+        <div class="container" data-aos="fade-up">
+            <h2>Cara Instalasi Ekstensi</h2>
+            <p class="subtitle">Pilih metode instalasi yang paling sesuai untuk Anda.</p>
+
+            <div class="tabs">
+                <button class="tab-button active" data-tab="zip-install">Instalasi ZIP (Direkomendasikan)</button>
+                <button class="tab-button" data-tab="crx-install">Instalasi CRX</button>
+            </div>
+
+            <div id="zip-install" class="tab-content active">
+                <div class="installation-method">
+                    <h3>Instalasi Mudah (Unpacked Extension)</h3>
+                    <p>Metode ini memungkinkan Anda menginstal ekstensi secara langsung di browser Chrome Anda. Ini adalah metode yang direkomendasikan.</p>
+                    
+                    <a href="assets/downloads/WA_Sender_Free.zip" download class="btn btn-primary btn-large" style="margin-bottom: 20px;">
+                        <i class="fas fa-file-zipper"></i>&nbsp; Unduh Ekstensi WA Sender (ZIP)
+                    </a>
+
+                    <h4>Langkah-langkah Instalasi:</h4>
+                    <ol>
+                        <li data-aos="fade-left" data-aos-delay="100">
+                            <i class="fas fa-download step-icon"></i>
+                            <div><strong>Unduh File ZIP:</strong> Klik tombol "Unduh Ekstensi WA Sender (ZIP)" di atas untuk mendapatkan file <code><a href="assets/downloads/WA_Sender_Free.zip" download>WA_Sender_Free.zip</a></code>.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="200">
+                            <i class="fas fa-file-zipper step-icon"></i>
+                            <div><strong>Ekstrak File:</strong> Setelah diunduh, ekstrak isi file <code><a href="assets/downloads/WA_Sender_Free.zip" download>WA_Sender_Free.zip</a></code> ke folder baru di komputer Anda. Pastikan Anda mengingat lokasi folder ini.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="300">
+                            <i class="fab fa-chrome step-icon"></i>
+                            <div><strong>Buka Halaman Ekstensi Chrome:</strong> Buka browser Chrome Anda, ketik <code><a href="chrome://extensions/">chrome://extensions/</a></code> di bilah alamat, lalu tekan Enter.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="400">
+                            <i class="fas fa-toggle-on step-icon"></i>
+                            <div><strong>Aktifkan Mode Pengembang:</strong> Di pojok kanan atas halaman Ekstensi, aktifkan tombol <strong>"Mode pengembang" (Developer mode)</strong>.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="500">
+                            <i class="fas fa-upload step-icon"></i>
+                            <div><strong>Muat Ekstensi:</strong> Klik tombol <strong>"Muat tanpa paket" (Load unpacked)</strong> yang muncul setelah Mode Pengembang diaktifkan.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="600">
+                            <i class="fas fa-folder-open step-icon"></i>
+                            <div><strong>Pilih Folder Ekstensi:</strong> Pilih folder tempat Anda mengekstrak file <code><a href="assets/downloads/WA_Sender_Free.zip" download>WA_Sender_Free.zip</a></code> pada Langkah 2.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="700">
+                            <i class="fas fa-check-circle step-icon"></i>
+                            <div><strong>Selesai!</strong> Ekstensi WA Sender sekarang sudah terinstal dan siap digunakan. Anda akan melihat ikon WA Sender di bilah alat browser Anda.</div>
+                        </li>
+                    </ol>
+                    <p class="warning"><strong>Penting:</strong> Jangan hapus folder ekstensi yang telah diekstrak. Ekstensi memerlukan folder tersebut untuk tetap berfungsi.</p>
+                </div>
+            </div>
+
+            <div id="crx-install" class="tab-content hidden">
+                <div class="installation-method">
+                    <h3>Instalasi CRX (Packed Extension)</h3>
+                    <p>Metode ini menggunakan file <code>.crx</code> yang merupakan paket ekstensi siap instal. Ini mungkin sedikit kurang intuitif dibandingkan metode ZIP.</p>
+                    
+                    <a href="assets/downloads/WA_Sender_Free.crx" download class="btn btn-primary btn-large" style="margin-bottom: 20px;">
+                        <i class="fas fa-box-open"></i>&nbsp; Unduh Ekstensi WA Sender (CRX)
+                    </a>
+
+                    <h4>Langkah-langkah Instalasi:</h4>
+                    <ol>
+                        <li><strong>Unduh File CRX:</strong> Klik tombol "Unduh Ekstensi WA Sender (CRX)" di atas untuk mendapatkan file <code>WA_Sender_Free.crx</code>.</li>
+                        <li><strong>Aktifkan Mode Pengembang:</strong> Di pojok kanan atas halaman Ekstensi, aktifkan tombol <strong>"Mode pengembang" (Developer mode)</strong>.</li>
+                        <li><strong>Seret dan Lepas File CRX:</strong> Seret file <code>WA_Sender_Free.crx</code> yang telah Anda unduh ke halaman <code><a href="chrome://extensions/">chrome://extensions/</a></code>.</li>
+                        <li><strong>Konfirmasi Instalasi:</strong> Sebuah pop-up konfirmasi akan muncul. Klik "Tambahkan ekstensi" untuk menyelesaikan instalasi.</li>
+                    </ol>
+                    <p class="warning"><strong>Perhatian:</strong> Chrome mungkin menampilkan peringatan bahwa ekstensi dari luar Chrome Web Store tidak aman. Anda dapat mengabaikan peringatan ini jika Anda mempercayai sumber ekstensi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="circuit-board-background"></div>
+        <div class="container" data-aos="fade-up">
+            <h2>Hubungi Kami</h2>
+            <p class="subtitle">Ada pertanyaan? Jangan ragu untuk menghubungi kami.</p>
+            <form class="contact-form" onsubmit="sendToWhatsApp(event)">
+                <div class="input-group" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="nama" placeholder="Nama Anda" required>
+                </div>
+                <div class="input-group" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-tasks input-icon"></i>
+                    <input type="text" id="keperluan" placeholder="Keperluan Anda" required>
+                </div>
+                <div class="input-group" data-aos="fade-up" data-aos-delay="300">
+                     <i class="fas fa-comment-dots input-icon" style="top: 25px;"></i>
+                    <textarea id="pesan" placeholder="Pesan Anda" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-paper-plane"></i>&nbsp; Kirim Pesan
+                </button>
+            </form>
+
+            <script>
+            function sendToWhatsApp(event) {
+                event.preventDefault();
+
+                const nama = document.getElementById("nama").value.trim();
+                const keperluan = document.getElementById("keperluan").value.trim();
+                const pesan = document.getElementById("pesan").value.trim();
+
+                const nomor = "62895602416781";
+
+                const text = `Nama: ${nama}\nKeperluan: ${keperluan}\nPesan: ${pesan}`;
+                const encodedText = encodeURIComponent(text);
+
+                const url = `https://wa.me/${nomor}?text=${encodedText}`;
+                window.open(url, "_blank");
+            }
+            </script>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 WA Sender. All rights reserved.</p>
+            <p>Developed by <a href="https://www.linkedin.com/in/rizqi-ahsan-setiawan-a37158319" target="_blank">RzkyNT</a></p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/rizqi-ahsan-setiawan-a37158319" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i><span class="text-label">LinkedIn</span></a>
+                <a href="https://www.instagram.com/rzky.nt" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i><span class="text-label">Instagram</span></a>
+                <a href="https://github.com/RzkyNT" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i><span class="text-label">GitHub</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS (Animate on Scroll) JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800, // values from 0 to 3000, with step 50ms
+            once: false, // whether animation should happen only once - while scrolling down
+        });
+
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.add('hidden'));
+
+                    button.classList.add('active');
+                    const targetTab = button.dataset.tab;
+                    document.getElementById(targetTab).classList.remove('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
