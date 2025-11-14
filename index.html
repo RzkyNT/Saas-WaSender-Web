@@ -393,14 +393,14 @@
             <p class="subtitle">Pilih metode instalasi yang paling sesuai untuk Anda.</p>
 
             <div class="tabs">
-                <button class="tab-button active" data-tab="crx-install">Instalasi CRX (Direkomendasikan)</button>
-                <button class="tab-button" data-tab="zip-install">Instalasi ZIP</button>
+                <button class="tab-button active" data-tab="zip-install">Instalasi ZIP (Direkomendasikan)</button>
+                <button class="tab-button" data-tab="crx-install">Instalasi CRX</button>
             </div>
 
-            <div id="zip-install" class="tab-content hidden">
+            <div id="zip-install" class="tab-content active">
                 <div class="installation-method">
                     <h3>Instalasi Mudah (Unpacked Extension)</h3>
-                    <p>Metode ini menggunakan file <code>.zip</code>. Ini mungkin sedikit kurang intuitif dibandingkan metode .CRX.</p>
+                    <p>Metode ini menggunakan file <code>.zip</code>. jadi di haruskan unzip terlebih dahulu.</p>
                     
                     <a href="https://github.com/RzkyNT/Wa-Ext/raw/refs/heads/main/extension.zip" download class="btn btn-primary btn-large" style="margin-bottom: 20px;">
                         <i class="fas fa-file-zipper"></i>&nbsp; Unduh Ekstensi WA Sender (ZIP)
@@ -441,10 +441,10 @@
                 </div>
             </div>
 
-            <div id="crx-install" class="tab-content active">
+            <div id="crx-install" class="tab-content hidden">
                 <div class="installation-method">
                     <h3>Instalasi CRX (Packed Extension)</h3>
-                    <p>Metode ini memungkinkan Anda menginstal ekstensi secara langsung di browser Chrome Anda. Ini adalah metode yang direkomendasikan.</p>
+                    <p>Metode ini memungkinkan Anda menginstal ekstensi secara langsung di browser Chrome Anda.</p>
                     
                     <a href="https://github.com/RzkyNT/Wa-Ext/raw/refs/heads/main/extension.crx" download class="btn btn-primary btn-large" style="margin-bottom: 20px;">
                         <i class="fas fa-box-open"></i>&nbsp; Unduh Ekstensi WA Sender (CRX)
