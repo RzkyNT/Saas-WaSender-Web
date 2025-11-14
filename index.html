@@ -308,9 +308,9 @@
                     <p>Kirim pesan ke ribuan kontak WhatsApp hanya dengan beberapa klik.</p>
                 </div>
                 <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-file-csv icon"></i>
-                    <h3>Impor CSV</h3>
-                    <p>Muat daftar nomor telepon dan pesan dari file CSV Anda.</p>
+                    <i class="fas fa-file-excel icon"></i>
+                    <h3>Impor Excel</h3>
+                    <p>Muat daftar nomor telepon dan pesan dari file Excel untuk mengirim file ke kontak Anda.</p>
                 </div>
                 <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
                     <i class="fas fa-save icon"></i>
@@ -325,7 +325,7 @@
                 <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
                     <i class="fas fa-user-tag icon"></i>
                     <h3>Pesan Personal</h3>
-                    <p>Personalisasi pesan Anda menggunakan placeholder dari data CSV.</p>
+                    <p>Personalisasi pesan Anda menggunakan placeholder dari data Excel.</p>
                 </div>
                 <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
                     <i class="fas fa-laptop-code icon"></i>
@@ -374,7 +374,7 @@
                         <div class="ray"></div>
                         <div class="card-content">
                             <img src="assets/images/showcase3.png" alt="Manajemen Template dan Mode Pengiriman" class="screenshot-item">
-                            <p class="screenshot-description">Antarmuka popup yang bersih, menampilkan opsi mode pengiriman (Manual/CSV) dan fitur manajemen template yang baru ditambahkan.</p>
+                            <p class="screenshot-description">Antarmuka popup yang bersih, menampilkan opsi mode pengiriman (Manual/Excel) dan fitur manajemen template yang baru ditambahkan.</p>
                         </div>
                         <div class="line topl"></div>
                         <div class="line leftl"></div>
@@ -393,14 +393,14 @@
             <p class="subtitle">Pilih metode instalasi yang paling sesuai untuk Anda.</p>
 
             <div class="tabs">
-                <button class="tab-button active" data-tab="zip-install">Instalasi ZIP (Direkomendasikan)</button>
-                <button class="tab-button" data-tab="crx-install">Instalasi CRX</button>
+                <button class="tab-button active" data-tab="crx-install">Instalasi CRX (Direkomendasikan)</button>
+                <button class="tab-button" data-tab="zip-install">Instalasi ZIP</button>
             </div>
 
-            <div id="zip-install" class="tab-content active">
+            <div id="zip-install" class="tab-content hidden">
                 <div class="installation-method">
                     <h3>Instalasi Mudah (Unpacked Extension)</h3>
-                    <p>Metode ini memungkinkan Anda menginstal ekstensi secara langsung di browser Chrome Anda. Ini adalah metode yang direkomendasikan.</p>
+                    <p>Metode ini menggunakan file <code>.zip</code>. Ini mungkin sedikit kurang intuitif dibandingkan metode .CRX.</p>
                     
                     <a href="https://github.com/RzkyNT/Wa-Ext/raw/refs/heads/main/extension.zip" download class="btn btn-primary btn-large" style="margin-bottom: 20px;">
                         <i class="fas fa-file-zipper"></i>&nbsp; Unduh Ekstensi WA Sender (ZIP)
@@ -441,10 +441,10 @@
                 </div>
             </div>
 
-            <div id="crx-install" class="tab-content hidden">
+            <div id="crx-install" class="tab-content active">
                 <div class="installation-method">
                     <h3>Instalasi CRX (Packed Extension)</h3>
-                    <p>Metode ini menggunakan file <code>.crx</code> yang merupakan paket ekstensi siap instal. Ini mungkin sedikit kurang intuitif dibandingkan metode ZIP.</p>
+                    <p>Metode ini memungkinkan Anda menginstal ekstensi secara langsung di browser Chrome Anda. Ini adalah metode yang direkomendasikan.</p>
                     
                     <a href="https://github.com/RzkyNT/Wa-Ext/raw/refs/heads/main/extension.crx" download class="btn btn-primary btn-large" style="margin-bottom: 20px;">
                         <i class="fas fa-box-open"></i>&nbsp; Unduh Ekstensi WA Sender (CRX)
@@ -452,10 +452,22 @@
 
                     <h4>Langkah-langkah Instalasi:</h4>
                     <ol>
-                        <li><strong>Unduh File CRX:</strong> Klik tombol "Unduh Ekstensi WA Sender (CRX)" di atas untuk mendapatkan file <code>WA_Sender_Free.crx</code>.</li>
-                        <li><strong>Aktifkan Mode Pengembang:</strong> Di pojok kanan atas halaman Ekstensi, aktifkan tombol <strong>"Mode pengembang" (Developer mode)</strong>.</li>
-                        <li><strong>Seret dan Lepas File CRX:</strong> Seret file <code>WA_Sender_Free.crx</code> yang telah Anda unduh ke halaman <code><a href="chrome://extensions/">chrome://extensions/</a></code>.</li>
-                        <li><strong>Konfirmasi Instalasi:</strong> Sebuah pop-up konfirmasi akan muncul. Klik "Tambahkan ekstensi" untuk menyelesaikan instalasi.</li>
+                        <li data-aos="fade-left" data-aos-delay="100">
+                            <i class="fas fa-download step-icon"></i>
+                            <div><strong>Unduh File CRX:</strong> Klik tombol "Unduh Ekstensi WA Sender (CRX)" di atas untuk mendapatkan file <code>WA_Sender_Free.crx</code>.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="200">
+                            <i class="fas fa-toggle-on step-icon"></i>
+                            <div><strong>Aktifkan Mode Pengembang:</strong> Di pojok kanan atas halaman Ekstensi, aktifkan tombol <strong>"Mode pengembang" (Developer mode)</strong>.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="300">
+                            <i class="fas fa-hand-pointer step-icon"></i>
+                            <div><strong>Seret dan Lepas File CRX:</strong> Seret file <code>WA_Sender_Free.crx</code> yang telah Anda unduh ke halaman <code><a href="chrome://extensions/">chrome://extensions/</a></code>.</div>
+                        </li>
+                        <li data-aos="fade-left" data-aos-delay="400">
+                            <i class="fas fa-check-circle step-icon"></i>
+                            <div><strong>Konfirmasi Instalasi:</strong> Sebuah pop-up konfirmasi akan muncul. Klik "Tambahkan ekstensi" untuk menyelesaikan instalasi.</div>
+                        </li>
                     </ol>
                     <p class="warning"><strong>Perhatian:</strong> Chrome mungkin menampilkan peringatan bahwa ekstensi dari luar Chrome Web Store tidak aman. Anda dapat mengabaikan peringatan ini jika Anda mempercayai sumber ekstensi.</p>
                 </div>
